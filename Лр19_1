@@ -1,0 +1,17 @@
+import pandas as pd
+import numpy as np
+
+# 1) Зчитування даних з points.csv у DataFrame
+points_df = pd.read_csv("points.csv")   
+
+# 2) Обчислення відстаней від центра координат (0,0,0)
+# Формула: d = sqrt(x^2 + y^2 + z^2)
+points_df["distance"] = np.sqrt(points_df["x"]**2 + points_df["y"]**2 + points_df["z"]**2)
+
+# Створення нового DataFrame лише з назвами точок і відстанями
+distance_df = points_df[["name", "distance"]]
+
+# 3) Збереження результатів у файл distance.csv
+distance_df.to_csv("distance.csv", index=False)
+
+print("Файл distance.csv успішно створено.")
